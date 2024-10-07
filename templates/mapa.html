@@ -73,7 +73,9 @@
                  hx-get="/obtener_coordenadas_ciudad"
                  hx-target="#ciudad" 
                  hx-trigger="keyup changed delay:1000ms"
-                 hx-swap="innerHTML ">
+                 hx-swap="innerHTML "
+                 hx-on::after-request="this.blur()">
+                 
             <span id="limpiar" onclick="limpiar_caja()" style=" font-size: 2.6em; 
                  border: solid 1px rgb(151, 149, 149);background-color: darkgray;cursor: pointer;">X</span>
              <!-- siguiente div es zona de inyección hTMX -->    
