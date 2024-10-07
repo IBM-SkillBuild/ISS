@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIS | Edu</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+
+</head>
+<body>
+    <section class="showcase">
+        <div class="video-container">
+            <video src="/static/video/iis.mp4" autoplay muted loop></video>
+        </div>
+        <div class="content">
+            <h1>International Space station</h1>
+            <h3>Discover the IIS trajectory</h3>
+            <a href="#about" class="btn">Read More</a>
+        </div>
+    </section>
+
+    <section id="about">
+               <a href="{{url_for('mostrar_mapa')}}" class="btn">Ir al Globo</a>
+
+        <br>
+        <p>
+            Mapbox | Maps, Navigation, Search, and Data. 
+        </p>
+
+        <h2>Follow Me On Social Media</h2>
+
+        <div class="social">
+        <a href="https://x.com/CabreraBlazquez" target="_blank"><i class="fab fa-twitter fa-3x"></i></a>
+               <a href="https://github.com/Api-Nasa/" target="_blank"><i class="fab fa-github fa-3x"></i></a>
+            <a href="https://www.linkedin.com/in/e-cabrera-blazquez/" target="_blank"><i class="fab fa-linkedin fa-3x"></i></a>
+        </div>
+    </section>
+</body>
+</html>

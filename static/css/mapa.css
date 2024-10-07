@@ -1,0 +1,72 @@
+ body {
+     margin: 0;
+     padding: 0;
+     background-image: url('https://cdn.pixabay.com/photo/2016/11/21/12/30/milky-way-1845068_1280.jpg');
+     background-size: cover;
+     background-repeat: no-repeat;
+     background-position: center;
+     background-attachment: fixed;
+     background-color: #000;
+     font-family: 'Arial', sans-serif;
+     height: 100vh;
+     overflow: hidden;
+     font-size: 0.8em;
+     position: relative;
+     z-index: 1;
+     color: #fff;
+
+ }
+
+ #map {
+     position: absolute;
+     top: 0;
+     bottom: 0;
+     width: 100%;
+     height: 100%;
+ }
+
+ .marker {
+     background-image: url('/static/icono_azul.png');
+     background-size: cover;
+     width: 12px;
+     height: 12px;
+     border-radius: 50%;
+     cursor: pointer;
+ }
+
+ .mapboxgl-ctrl-logo {
+     display: none !important;
+ }
+
+ .mapboxgl-ctrl-icon {
+     display: none !important;
+ }
+
+ .mapboxgl-ctrl-attrib-button {
+     display: none !important;
+ }
+
+ .mapboxgl-ctrl-attrib {
+     display: none !important;
+ }
+
+ .mapboxgl-ctrl-attrib-button {
+     display: none !important;
+ }
+
+ .ciudades {
+    z-index: 1;
+   
+     margin: 0.3em;
+     min-width: 8em;
+     padding: 1em; 
+     cursor: pointer;
+     color:#fff ;
+     background-color: rgb(46, 126, 146) !important;
+ }
+
+ @media (max-width: 120px) {
+     .uk-offcanvas-bar {
+         width: 300px !important;
+     }
+ }

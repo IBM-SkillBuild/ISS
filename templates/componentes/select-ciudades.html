@@ -1,0 +1,17 @@
+
+<select class="uk-select" id="lista-ciudades"
+name="lista-ciudades"
+required=""
+width="20" 
+title="Lista-ciudades"
+hx-get="/pasos"
+hx-target="#pasos" 
+hx-trigger="change"
+hx-swap="innerHTML ">
+>
+    <option value="">Selecciona ciudad</option>
+   {% for ciudad in ciudades%}
+   <option value="{{ciudad}}">{{ciudad}}</option>
+   {% endfor %}
+</select>
+<div id="pasos"></div>

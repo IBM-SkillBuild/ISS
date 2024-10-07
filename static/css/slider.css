@@ -1,0 +1,100 @@
+.slider-container {
+    width: 80%;
+    height: 90px;
+  position: relative;
+  margin-top:10px;
+}
+
+#slider {
+  display:inline-block;
+  width: 100%;
+    height: 17px;
+    top: 37px;
+}
+#sliderHandle {
+  display:inline-block;
+  width: 100%;
+    height: 17px;
+    top: 37px;
+}
+
+#slider .ui-slider-handle{
+  top:-15px;
+    width: 42px;
+    height: 42px;
+    border-radius: 25px;
+    background: #f36533;
+    border: 2px solid #ffffff;
+}
+
+#sliderHandle .ui-slider-handle{
+  top:-15px;
+    width: 42px;
+    height: 42px;
+    border-radius: 25px;
+    background: #1065ba;
+    border: 2px solid #ffffff;
+    text-align:center;
+    line-height:42px;
+  font-weight:600;
+  font-size:18px;
+  color:#ffffff;
+}
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr {
+    border-top-right-radius: 9px;
+     border-top-left-radius: 9px;
+}
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+    border-bottom-right-radius: 9px;
+     border-bottom-left-radius: 9px;
+}
+
+.ui-widget-content{
+    border: 1px solid #ffffff !important; 
+    background: #aaa7a0 ; 
+    color: #222222; 
+}
+.ui-widget-header { 
+       border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border: 1px solid #f36633; 
+    background: #f36633; 
+    color: #222222; 
+    font-weight: bold; }
+
+#sliderHandle .ui-widget-header { 
+       border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border: 1px solid #1065ba; 
+    background: #1065ba; 
+    color: #222222; 
+    font-weight: bold; }
+
+.ui-slider-horizontal .ui-slider-handle {
+    margin-left: -0.8em;
+}
+
+#eq{
+  height:150px;
+}
+ #eq > span {
+  display:inline-block;
+  height:120px; 
+  margin:20px;
+}
+#eq .ui-slider-handle{
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+  border: 1px solid #ffffff; 
+  background: #7a182d; 
+  left:-6px;
+}
+#eq .ui-widget-header { 
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border: 1px solid #7a182d; 
+  background: #7a182d; 
+}

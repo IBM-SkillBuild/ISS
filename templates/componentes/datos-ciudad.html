@@ -1,0 +1,40 @@
+{% for i in range(ciudades|length) %}
+<div id="{{ciudades[i][0]}}" onclick="localizar('{{i}}')" style="border: 1px solid whitesmoke;border-radius: 1em;margin-bottom: 0.5em;padding: 1em;background-color:rgb(60, 61, 61);cursor: pointer;">
+    <h4>{{ ciudades[i][0] }} longitud: {{ ciudades[i][1] }} latitud: {{ ciudades[i][2] }}</h4>
+</div>
+{% endfor %}
+
+ {{ nasa_widget_content | safe }}
+
+
+
+ <script>
+
+    function localizar(item){
+        var lugares = JSON.parse('{{ ciudades | tojson | safe }}');
+    
+
+  
+        // VUELA A COORDENADAS DE ciudad encontrada
+        if (screen.width < 1200) {
+            document.getElementById('cerrar-aside').click()
+        }
+        $('#hideKeyboard').focus();
+        var long = lugares[item][2];
+        var lat = lugares[item][1];
+        if (long != 0 && lat !=0) {
+
+            map.flyTo({
+                center: [long,lat],
+                zoom: zoomy,
+                speed: 0.2,
+            });
+        }
+    }
+
+
+
+  
+  
+
+</script> 
