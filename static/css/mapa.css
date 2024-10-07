@@ -65,7 +65,7 @@
      background-color: rgb(46, 126, 146) !important;
  }
 
- @media (max-width: 120px) {
+ @media (max-width: 1200px) {
      .uk-offcanvas-bar {
          width: 300px !important;
      }

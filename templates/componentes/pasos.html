@@ -2,24 +2,25 @@
 {% set source = "https://spotthestation.nasa.gov/widget/widget.cfm?country=" + pais|urlencode + "&region=None&city=" + ciudad|urlencode + "&theme=2" %}
 
 <div class="widget-container">
-    <iframe id="nasa" src='{{source}}' frameborder='0'></iframe>
+    <iframe id="nasa" src='{{source}}' frameborder='0' width="100%" scrolling="no"></iframe>
 </div>
 
 <style>
     .widget-container {
-        display: flex;
-        margin: 1em auto 0;
+        display: block;
+        margin: 1em 0;
         border: 1px solid #CCC;
         border-radius: 6px;
         position: relative;
         overflow: hidden;
-        width: 100%;
-        max-width: 310px;
+        width: 95%;
         height: 450px;
         z-index: 1;
     }
     
     #nasa {
+        width: 1px;
+        min-width: 100%;
         width: 100%;
         height: 100%;
         border: none;
@@ -41,6 +42,11 @@
                 userAgentMeta.name = 'user-agent';
                 userAgentMeta.content = '{{user_agent}}';
                 iframeDoc.head.appendChild(userAgentMeta);
+                
+                // Añadir estilos al contenido del iframe
+                var style = iframeDoc.createElement('style');
+                style.textContent = 'body { width: 100% !important; max-width: none !important; }';
+                iframeDoc.head.appendChild(style);
             } catch (e) {
                 console.error('No se pudo modificar el contenido del iframe:', e);
             }

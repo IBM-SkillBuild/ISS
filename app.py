@@ -104,6 +104,9 @@ def obtener_coordenadas_ciudad():
         lugares.append([f"Error en la búsqueda: {str(e)}", "", ""])
         return render_template('/componentes/datos-ciudad.html', ciudades=lugares)
 pais=""
+from flask import jsonify, render_template, request
+import requests
+
 @app.route('/ciudades', methods=['GET'])
 def ciudades():
     global pais
@@ -111,26 +114,39 @@ def ciudades():
     if not pais:
         return jsonify({"error": "No se proporcionó un país"}), 400
 
-    url = "https://countriesnow.space/api/v0.1/countries"
+    poblacion_minima = 200000  # Ajusta este valor según tus necesidades
+
+    url = "https://countriesnow.space/api/v0.1/countries/population/cities/filter"
+    payload = {
+        "country": pais,
+        "order": "dsc",
+        "orderBy": "population",
+        "limit": 1000  # Ajusta este límite según tus necesidades
+    }
+
     try:
-        respuesta = requests.get(url, timeout=10)
+        respuesta = requests.post(url, json=payload, timeout=10)
         respuesta.raise_for_status()
         datos = respuesta.json()
         
-        pais_encontrado = next((item for item in datos['data'] if item['country'].lower() == pais.lower()), None)
-        
-        if pais_encontrado:
-            ciudades = pais_encontrado['cities']
-            if isinstance(ciudades, list):
+        if 'data' in datos and isinstance(datos['data'], list):
+            ciudades_filtradas = [
+                ciudad['city'] 
+                for ciudad in datos['data'] 
+                if ciudad.get('populationCounts') and 
+                   int(ciudad['populationCounts'][0]['value']) > poblacion_minima
+            ]
+            
+            if ciudades_filtradas:
                 try:
-                    return render_template('/componentes/select-ciudades.html', ciudades=ciudades, pais=pais_encontrado['country'])
+                    return render_template('/componentes/select-ciudades.html', ciudades=ciudades_filtradas, pais=pais)
                 except Exception as e:
                     print(f"Error al renderizar la plantilla: {str(e)}")
                     return jsonify({"error": f"Error al renderizar la plantilla: {str(e)}"}), 500
             else:
-                return jsonify({"error": f"Formato de datos inesperado para las ciudades de {pais}"}), 500
-        
-        return jsonify({"error": f"No se encontró el país: {pais}"}), 404
+                return jsonify({"error": f"No se encontraron ciudades con población mayor a {poblacion_minima} en {pais}"}), 404
+        else:
+            return jsonify({"error": f"Formato de datos inesperado para las ciudades de {pais}"}), 500
     
     except requests.Timeout:
         print("La solicitud excedió el tiempo de espera")
