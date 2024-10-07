@@ -1,5 +1,7 @@
-{% set user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" %}
-{% set source = "https://spotthestation.nasa.gov/widget/widget.cfm?country=" + pais|urlencode + "&region=None&city=" + ciudad|urlencode + "&theme=2" %}
+{% set user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)
+Chrome/91.0.4472.124 Safari/537.36" %}
+{% set source = "https://spotthestation.nasa.gov/widget/widget.cfm?country=" + pais|urlencode + "&region=None&city=" +
+ciudad|urlencode + "&theme=2" %}
 
 <div class="widget-container">
     <iframe id="nasa" src='{{source}}' frameborder='0' width="100%" scrolling="no"></iframe>
@@ -17,7 +19,7 @@
         height: 450px;
         z-index: 1;
     }
-    
+
     #nasa {
         width: 1px;
         min-width: 100%;
@@ -28,21 +30,21 @@
 </style>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         var iframe = document.getElementById('nasa');
-        iframe.onload = function() {
+        iframe.onload = function () {
             try {
                 var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
                 var meta = iframeDoc.createElement('meta');
                 meta.name = 'viewport';
                 meta.content = 'width=device-width, initial-scale=1, maximum-scale=1';
                 iframeDoc.head.appendChild(meta);
-                
+
                 var userAgentMeta = iframeDoc.createElement('meta');
                 userAgentMeta.name = 'user-agent';
                 userAgentMeta.content = '{{user_agent}}';
                 iframeDoc.head.appendChild(userAgentMeta);
-                
+
                 // Añadir estilos al contenido del iframe
                 var style = iframeDoc.createElement('style');
                 style.textContent = 'body { width: 100% !important; max-width: none !important; }';
@@ -51,8 +53,8 @@
                 console.error('No se pudo modificar el contenido del iframe:', e);
             }
         };
-        
-        iframe.onerror = function() {
+
+        iframe.onerror = function () {
             console.error('Error al cargar el iframe');
             iframe.srcdoc = '<p>Lo sentimos, no se pudo cargar el widget. Por favor, inténtelo de nuevo más tarde.</p>';
         };

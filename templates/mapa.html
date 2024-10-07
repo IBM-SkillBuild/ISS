@@ -22,7 +22,7 @@
     <script src="https://unpkg.com/htmx.org@2.0.3"></script>
     <script src="{{url_for('static',filename='js/ciudades.js')}}"></script>
     <script src="{{url_for('static',filename='js/contador.js')}}"></script>
-    
+
 
     <!-- plus a jQuery UI theme, here I use "flick" -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/flick/jquery-ui.css">
@@ -31,7 +31,7 @@
 </head>
 
 <body>
-    
+
 
     <!-- This is a button toggling the off-canvas  BOTON QUE EXPANDE DESPLEGABLE OPCIONES-->
     <button uk-toggle="target: #my-id" type="button" style="z-index: 1;position: fixed;border-radius: 0.5em;
@@ -46,7 +46,7 @@
 
 
         <div class="uk-offcanvas-bar" style="width: 600px !important;">
-        
+
             <ul style="z-index: 1;float: left; margin-bottom: 2em;">
                 <li id="latitud" style="z-index: 1;font-size: 1em;"></li>
                 <li id="longitud" style="z-index: 1;font-size: 1em;"></li>
@@ -54,11 +54,14 @@
             </ul>
 
             <button onclick="centrarMapa()" style="z-index: 1;border-radius: 0.5em;width: 80%;
-            font-size: 1.5em;padding: 0.5em;display: block;margin-bottom: 1em;cursor:pointer ;">Trayectoria IIS en tiempo real</button>
+            font-size: 1.5em;padding: 0.5em;display: block;margin-bottom: 1em;cursor:pointer ;">Trayectoria IIS en
+                tiempo real</button>
             <button onclick="lista_xml()" style="z-index: 1;border-radius: 0.5em;width: 80%;
-            font-size: 1.5em;padding: 0.5em;display: block;margin-bottom: 1em;cursor: pointer;">Predicción de Trayectoria y días anteriores</button>
-             <button id="borrar_xml"  onclick="borrar_xml()" style="z-index: 1;border-radius: 0.5em;width: 80%;
-            font-size: 1.5em;padding: 0.5em;display: block;margin-bottom: 1em;cursor: pointer;display: none;">Borrar puntos predicciones</button>
+            font-size: 1.5em;padding: 0.5em;display: block;margin-bottom: 1em;cursor: pointer;">Predicción de
+                Trayectoria y días anteriores</button>
+            <button id="borrar_xml" onclick="borrar_xml()" style="z-index: 1;border-radius: 0.5em;width: 80%;
+            font-size: 1.5em;padding: 0.5em;display: block;margin-bottom: 1em;cursor: pointer;display: none;">Borrar
+                puntos predicciones</button>
 
             <div class="slider-container">
                 <div id="sliderHandle">
@@ -69,20 +72,17 @@
                 name="hideKeyboard" readonly="readonly" />
             <input id="caja-buscar" onkeypress="return event.keyCode != 13;" class="uk-input"
                 placeholder="busca (Pais,Ciudad,Rio,Lago...)" autocomplete="off" type="text"
-                style="width: 80%;margin-top: -1.2em;" name="buscador"
-                 hx-get="/obtener_coordenadas_ciudad"
-                 hx-target="#ciudad" 
-                 hx-trigger="keyup changed delay:1000ms"
-                 hx-swap="innerHTML "
-                 hx-on::after-request="this.blur()">
-                 
+                style="width: 80%;margin-top: -1.2em;" name="buscador" hx-get="/obtener_coordenadas_ciudad"
+                hx-target="#ciudad" hx-trigger="keyup changed delay:1000ms" hx-swap="innerHTML "
+                hx-on::after-request="this.blur()">
+
             <span id="limpiar" onclick="limpiar_caja()" style=" font-size: 2.6em; 
                  border: solid 1px rgb(151, 149, 149);background-color: darkgray;cursor: pointer;">X</span>
-             <!-- siguiente div es zona de inyección hTMX -->    
+            <!-- siguiente div es zona de inyección hTMX -->
             <div id="ciudad" style="margin-top:0.3em;width: 85%;"></div>
-          
-       
-         
+
+
+
 
 
 
@@ -90,85 +90,82 @@
 
             <ul uk-accordion="collapsible: true" style="background-color:rgb(60, 61, 61);width: 95%;">
                 <li>
-                    <a class="uk-accordion-title" style="background-color:rgb(60, 61, 61);padding: 0.5em;border-bottom: 1px solid white;width: 95%;" >Tags favoritos</a>
+                    <a class="uk-accordion-title"
+                        style="background-color:rgb(60, 61, 61);padding: 0.5em;border-bottom: 1px solid white;width: 95%;">Tags
+                        favoritos</a>
                     <div class="uk-accordion-content" style="width: 95%;">
                         <div id="SA" class="uk-badge ciudades" style="color:white !important">America del Sur</div>
-                            <div id="NA" class="uk-badge ciudades" style="color:white !important">America del Norte</div>
-                            <div id="dublin" class="uk-badge ciudades" style="color:white !important">Dublín</div>
-                            <div id="londres" class="uk-badge ciudades" style="color:white !important">London</div>
-                            <div id="trinidad" class="uk-badge ciudades" style="color:white !important">Trinidad y Tobago</div>
-                            <div id="habana" class="uk-badge ciudades" style="color:white !important">La Habana</div>
-                            <div id="vancouver" class="uk-badge ciudades" style="color:white !important">Vancouver</div>
-                            <div id="madrid" class="uk-badge ciudades" style="color:white !important">Madrid</div>
-                            <div id="huelva" class="uk-badge ciudades" style="color:white !important">Huelva</div>
-                            <div id="paris" class="uk-badge ciudades" style="color:white !important">París</div>
-                            <div id="caracas" class="uk-badge ciudades" style="color:white !important">Caracas</div>
-                            <div id="mallorca" class="uk-badge ciudades" style="color:white !important">Mallorca</div>
-                                    </div>
+                        <div id="NA" class="uk-badge ciudades" style="color:white !important">America del Norte</div>
+                        <div id="dublin" class="uk-badge ciudades" style="color:white !important">Dublín</div>
+                        <div id="londres" class="uk-badge ciudades" style="color:white !important">London</div>
+                        <div id="trinidad" class="uk-badge ciudades" style="color:white !important">Trinidad y Tobago
+                        </div>
+                        <div id="habana" class="uk-badge ciudades" style="color:white !important">La Habana</div>
+                        <div id="vancouver" class="uk-badge ciudades" style="color:white !important">Vancouver</div>
+                        <div id="madrid" class="uk-badge ciudades" style="color:white !important">Madrid</div>
+                        <div id="huelva" class="uk-badge ciudades" style="color:white !important">Huelva</div>
+                        <div id="paris" class="uk-badge ciudades" style="color:white !important">París</div>
+                        <div id="caracas" class="uk-badge ciudades" style="color:white !important">Caracas</div>
+                        <div id="mallorca" class="uk-badge ciudades" style="color:white !important">Mallorca</div>
+                    </div>
                 </li>
                 <li>
-                    <a class="uk-accordion-title" style="background-color:rgb(60, 61, 61);padding: 0.5em;width: 95%;border-bottom: 1px solid white">Consultar días de visibilidad</a>
+                    <a class="uk-accordion-title"
+                        style="background-color:rgb(60, 61, 61);padding: 0.5em;width: 95%;border-bottom: 1px solid white">Consultar
+                        días de visibilidad</a>
                     <div class="uk-accordion-content" style="width: 95%;">
                         <form style="width: 100%;">
-                          
-                           
-                                <select id="country"
-                                 class="uk-select" 
-                                 name="country"
-                                 required=""
-                                 width="20" 
-                                 title="Country"
-                                 style="outline: none;"
-                                 hx-get="/ciudades"
-                                 hx-target="#select-ciudades" 
-                                 hx-trigger="change"
-                                 hx-swap="innerHTML ">
-                                 <option value="">Seleccionar País</option>
-                                 <option value="Argentina">Argentina</option>
-                                 <option value="Australia">Australia</option>
-                                 <option value="Brazil">Brasil</option>
-                                 <option value="Canada">Canadá</option>
-                                 <option value="Chile">Chile</option>
-                                 <option value="China">China</option>
-                                 <option value="Colombia">Colombia</option>
-                                 <option value="Ecuador">Ecuador</option>
-                                 <option value="Egypt">Egipto</option>
-                                 <option value="France">Francia</option>
-                                 <option value="Germany">Alemania</option>
-                                 <option value="India">India</option>
-                                 <option value="Indonesia">Indonesia</option>
-                                 <option value="Italy">Italia</option>
-                                 <option value="Japan">Japón</option>
-                                 <option value="Kenya">Kenia</option>
-                                 <option value="Mexico">México</option>
-                                 <option value="Morocco">Marruecos</option>
-                                 <option value="New_Zealand">Nueva Zelanda</option>
-                                 <option value="Nigeria">Nigeria</option>
-                                 <option value="Peru">Perú</option>
-                                 <option value="Russia">Rusia</option>
-                                 <option value="Saudi_Arabia">Arabia Saudita</option>
-                                 <option value="South_Africa">Sudáfrica</option>
-                                 <option value="South_Korea">Corea del Sur</option>
-                                 <option value="Spain">España</option>
-                                 <option value="United_Arab_Emirates">Emiratos Árabes Unidos</option>
-                                 <option value="United_Kingdom">Reino Unido</option>
-                                 <option value="United_States">Estados Unidos</option>
-                                    </select>
+
+
+                            <select id="country" class="uk-select" name="country" required="" width="20" title="Country"
+                                style="outline: none;" hx-get="/ciudades" hx-target="#select-ciudades"
+                                hx-trigger="change" hx-swap="innerHTML ">
+                                <option value="">Seleccionar País</option>
+                                <option value="Argentina">Argentina</option>
+                                <option value="Australia">Australia</option>
+                                <option value="Brazil">Brasil</option>
+                                <option value="Canada">Canadá</option>
+                                <option value="Chile">Chile</option>
+                                <option value="China">China</option>
+                                <option value="Colombia">Colombia</option>
+                                <option value="Ecuador">Ecuador</option>
+                                <option value="Egypt">Egipto</option>
+                                <option value="France">Francia</option>
+                                <option value="Germany">Alemania</option>
+                                <option value="India">India</option>
+                                <option value="Indonesia">Indonesia</option>
+                                <option value="Italy">Italia</option>
+                                <option value="Japan">Japón</option>
+                                <option value="Kenya">Kenia</option>
+                                <option value="Mexico">México</option>
+                                <option value="Morocco">Marruecos</option>
+                                <option value="New_Zealand">Nueva Zelanda</option>
+                                <option value="Nigeria">Nigeria</option>
+                                <option value="Peru">Perú</option>
+                                <option value="Russia">Rusia</option>
+                                <option value="Saudi_Arabia">Arabia Saudita</option>
+                                <option value="South_Africa">Sudáfrica</option>
+                                <option value="South_Korea">Corea del Sur</option>
+                                <option value="Spain">España</option>
+                                <option value="United_Arab_Emirates">Emiratos Árabes Unidos</option>
+                                <option value="United_Kingdom">Reino Unido</option>
+                                <option value="United_States">Estados Unidos</option>
+                            </select>
                             </select>
                             <div id="select-ciudades"></div>
                             <div id="pasos" style="width: 100% !important;"></div>
-                         
+
                         </form>
                     </div>
                 </li>
-               
+
             </ul>
             <button id="cerrar-aside" class="uk-offcanvas-close" type="button" uk-close></button>
 
         </div>
-        
+
     </div>
-   
+
 
 
 
@@ -179,19 +176,19 @@
         var zoomy = 0.8
 
         function lista_xml() {
-            document.getElementById('borrar_xml').style.display="block"
+            document.getElementById('borrar_xml').style.display = "block"
             var ubicaciones = JSON.parse('{{ lista | tojson | safe }}');
-        
-                
-            
+
+
+
             // Eliminar capas y fuentes existentes si las hay
-            ['iss-points'].forEach(function(layer) {
+            ['iss-points'].forEach(function (layer) {
                 if (map.getLayer(layer)) map.removeLayer(layer);
                 if (map.getSource(layer)) map.removeSource(layer);
             });
 
             // Crear array de coordenadas para los puntos
-            var coordinates = ubicaciones.map(function(ubicacion) {
+            var coordinates = ubicaciones.map(function (ubicacion) {
                 return [parseFloat(ubicacion[1]), parseFloat(ubicacion[0])];
             }).filter(coord => !isNaN(coord[0]) && !isNaN(coord[1]));
 
@@ -200,7 +197,7 @@
                 'type': 'geojson',
                 'data': {
                     'type': 'FeatureCollection',
-                    'features': coordinates.map(function(coord) {
+                    'features': coordinates.map(function (coord) {
                         return {
                             'type': 'Feature',
                             'geometry': {
@@ -210,7 +207,7 @@
                         };
                     })
                 }
-                
+
             });
 
             map.addLayer({
@@ -222,11 +219,11 @@
                     'circle-color': '#ff0000',
                     'circle-opacity': 0.8
                 }
-                
+
             });
 
             // Ajustar la vista del mapa
-            var bounds = coordinates.reduce(function(bounds, coord) {
+            var bounds = coordinates.reduce(function (bounds, coord) {
                 return bounds.extend(coord);
             }, new mapboxgl.LngLatBounds(coordinates[0], coordinates[0]));
 
@@ -235,20 +232,20 @@
                 maxZoom: 15,
                 duration: 2000
             });
-            
+
             document.getElementById('cerrar-aside').click()
         }
 
-        function borrar_xml(){
-              
-              // Eliminar capas y fuentes existentes si las hay
-              ['iss-points'].forEach(function(layer) {
+        function borrar_xml() {
+
+            // Eliminar capas y fuentes existentes si las hay
+            ['iss-points'].forEach(function (layer) {
                 if (map.getLayer(layer)) map.removeLayer(layer);
                 if (map.getSource(layer)) map.removeSource(layer);
             });
-             document.getElementById('borrar_xml').style.display="none"
-             
-             document.getElementById('cerrar-aside').click()
+            document.getElementById('borrar_xml').style.display = "none"
+
+            document.getElementById('cerrar-aside').click()
         }
 
         function actualizarUbicacion() {
@@ -313,7 +310,7 @@
 
 
         function centrarMapa() {
-            
+
             if (map && marker) {
                 if (screen.width < 1200) {
                     document.getElementById('cerrar-aside').click()
@@ -373,7 +370,7 @@
 
         }
 
-        
+
 
 
     </script>
