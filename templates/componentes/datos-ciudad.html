@@ -27,12 +27,12 @@
             if (/Mobi|Android/i.test(navigator.userAgent)) {
                 map.jumpTo({
                     center: [long, lat],
-                    zoom: zoomy
+                    zoom: 6
                 });
             } else {
                 map.flyTo({
                     center: [long, lat],
-                    zoom: zoomy,
+                    zoom: 6,
                     speed: 0.2,
                 });
             }

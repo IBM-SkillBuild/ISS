@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+  if (screen.width < 1200) {
+    document.getElementsByClassName('slider-container').style.display="none"
+}
   const ciudades = {
     'SA': {center: [-63, -24], zoom: 2.4},
     'NA': {center: [-87, 41], zoom: 2.4},
