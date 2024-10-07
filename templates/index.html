@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,48 @@
     <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
 
+    <style>
+        .btn-clicked {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+        }
+
+        .loading-spinner {
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+    </style>
 </head>
+
 <body>
     <section class="showcase">
         <div class="video-container">
@@ -16,25 +58,64 @@
         <div class="content">
             <h1>International Space station</h1>
             <h3>Discover the IIS trajectory</h3>
-            <a href="#about" class="btn">Read More</a>
+            <a href="#app" class="btn">Read More</a>
         </div>
     </section>
 
-    <section id="about">
-               <a href="{{url_for('mostrar_mapa')}}" class="btn">Ir al Globo</a>
+    <section id="app">
+        <a href="{{url_for('mostrar_mapa')}}" class="btn" id="openAppBtn">Abrir la Aplicación ISS</a>
 
         <br>
         <p>
-            Mapbox | Maps, Navigation, Search, and Data. 
+            Mapbox | Maps, Navigation, Search, and Data.
         </p>
 
         <h2>Follow Me On Social Media</h2>
 
         <div class="social">
-        <a href="https://x.com/CabreraBlazquez" target="_blank"><i class="fab fa-twitter fa-3x"></i></a>
-               <a href="https://github.com/Api-Nasa/" target="_blank"><i class="fab fa-github fa-3x"></i></a>
-            <a href="https://www.linkedin.com/in/e-cabrera-blazquez/" target="_blank"><i class="fab fa-linkedin fa-3x"></i></a>
+            <a href="https://x.com/CabreraBlazquez" target="_blank"><i class="fab fa-twitter fa-3x"></i></a>
+            <a href="https://github.com/Api-Nasa/" target="_blank"><i class="fab fa-github fa-3x"></i></a>
+            <a href="https://www.linkedin.com/in/e-cabrera-blazquez/" target="_blank"><i
+                    class="fab fa-linkedin fa-3x"></i></a>
         </div>
     </section>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script>
+        document.getElementById('openAppBtn').addEventListener('click', function (event) {
+            window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+            event.preventDefault();
+            this.classList.add('btn-clicked');
+            document.getElementById('loadingOverlay').style.display = 'block';
+            setTimeout(() => {
+                window.location.href = this.href;
+            }, 300);
+        });
+        // Forzar recarga al volver a esta página
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
+
+     
+
+    // Intentar subir el scroll varias veces
+    window.onload = function() {
+        window.scrollTo(0, 0);
+      
+    };
+
+   
+         
+        
+    </script>
 </body>
+
 </html>

@@ -88,18 +88,18 @@ h1 {
 	transform: scale(0.98);
 }
 
-#about {
+#app {
 	padding: 40px;
 	text-align: center;
 }
 
-#about p {
+#app p {
 	font-size: 1.2rem;
 	max-width: 600px;
 	margin: auto;
 }
 
-#about h2 {
+#app h2 {
 	margin: 30px 0;
 	color: var(--primary-color);
 }

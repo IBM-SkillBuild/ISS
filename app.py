@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify,redirect,url_for
 import requests
 import xmltodict
 from datetime import datetime
@@ -69,11 +69,16 @@ def obtener_y_procesar_datos_xml():
         print(f"Error al obtener o procesar el archivo XML: {str(e)}")
         return [], [], []
 
+
+
+
 @app.route('/mapa')
 def mostrar_mapa():
     ubicacion = obtener_ubicacion_iss()
     lista, latitudes, longitudes = obtener_y_procesar_datos_xml()
     return render_template('mapa.html', ubicacion=ubicacion, lista=lista)
+
+
 
 @app.route('/')
 def inicio():
