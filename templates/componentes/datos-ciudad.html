@@ -24,11 +24,23 @@
         var lat = lugares[item][1];
         if (long != 0 && lat !=0) {
 
-            map.flyTo({
-                center: [long,lat],
-                zoom: zoomy,
-                speed: 0.2,
-            });
+            if (/Mobi|Android/i.test(navigator.userAgent)) {
+                map.jumpTo({
+                    center: [long, lat],
+                    zoom: zoomy
+                });
+            } else {
+                map.flyTo({
+                    center: [long, lat],
+                    zoom: zoomy,
+                    speed: 0.2,
+                });
+            }
+            
+            // Asegurarse de que el mapa se ha actualizado
+            setTimeout(function() {
+                map.fire('moveend');
+            }, 1000);
         }
     }
 
@@ -37,4 +49,4 @@
   
   
 
-</script> 
+</script>
