@@ -53,7 +53,8 @@
 <body>
     <section class="showcase">
         <div class="video-container">
-            <video src="/static/video/iis.mp4" autoplay muted loop></video>
+           
+            <video src="{{ url_for('static', filename='video/iis.mp4') }}" autoplay loop></video>
         </div>
         <div class="content">
             <h1>International Space station</h1>
